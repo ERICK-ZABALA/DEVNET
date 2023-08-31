@@ -24,7 +24,7 @@ child = pexpect.spawn('ssh devnet@34.125.235.12 -p 922')
 
 index = child.expect(["Are you sure you want to continue connecting", pexpect.EOF, pexpect.TIMEOUT])
 
-print('Index:', index)
+print('Index: ', index)
 
 if index == 0:
     # Enviar 'yes' para aceptar la clave RSA
