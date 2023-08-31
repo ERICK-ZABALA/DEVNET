@@ -29,8 +29,11 @@ for device in devices.keys():
     if index == 2:
         child.expect(["Password:", pexpect.EOF, pexpect.TIMEOUT])
         child.sendline(password)
-        child.expect(device_prompt)
+        child.expect(device_prompt, timeout=5)
         print( 'The Device is in Mode: "Configure Terminal"')
+        
+        # Debug tool for Pexpect is to log the output in a file.
+        child.logfile = open('debug', 'wb')
 
         print('**** Generating... - show version | include V ****\n')
 
@@ -39,6 +42,7 @@ for device in devices.keys():
         child.expect(device_prompt)
         print(child.before)
         child.sendline('exit')
+
 
 
 """
