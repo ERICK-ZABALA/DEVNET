@@ -1,0 +1,82 @@
+Paramiko is a library to work specific for SSHv2
+pip install Paramiko
+
+
+(iosv) @ERICK-ZABALA ➜ /workspaces/DEVNET/network/paramiko (main) $ pip list
+Package      Version
+------------ -------
+bcrypt       4.0.1
+cffi         1.15.1
++ cryptography 41.0.3
++ paramiko     3.3.1
+pexpect      4.8.0
+pip          23.2.1
+ptyprocess   0.7.0
+pycparser    2.21
+PyNaCl       1.5.0
+setuptools   63.2.0
+
+# Paramiko can be used to admin servers using ssh v2
+
+command: ssh-keygen -t rsa
+
+this command generate a public key in the directory ~/.ssh 
+also a private key called "id_rsa"
+
+private key = password (similar to the password)
+public key = is similar to credentials "Business card - Pasport"
+
+PRIK('id_rsa') + PUBK('id_rsa.pub') 
+* Host Local: the mesages are encrypted over PRIK
+* Host remote: decrypt message using PUBK.
+
+Copy Public Key:
+$ cat ~/.ssh/id_rsa.pub
+ssh-rsa <your public key>
+
+"""
+Host Python Machine:
+Key Public
+
+ $ (iosv) @ERICK-ZABALA ➜ /workspaces/DEVNET/network/paramiko (main) $ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/codespace/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/codespace/.ssh/id_rsa
+Your public key has been saved in /home/codespace/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:99JFSO+3fEklnyIQsdQ+ua48kCXnjuCilniVFOD1moo codespace@codespaces-b04c0d
+The key's randomart image is:
++---[RSA 3072]----+
+|  ...    +o .    |
+| . ...  . oo o   |
+|  .  ..  o. o + .|
+|    .o . o.+ o oo|
+|   .o.  S ..o.ooo|
+| . .o. o o +..+.o|
+|E o.. . + o o  +.|
+|.o.. . ..o o    .|
+|.o. .    oo      |
++----[SHA256]-----+
+(iosv) @ERICK-ZABALA ➜ /workspaces/DEVNET/network/paramiko (main) $ cd ~/.ssh
+(iosv) @ERICK-ZABALA ➜ ~/.ssh $ ls
+authorized_keys  id_rsa  id_rsa.pub  known_hosts
+(iosv) @ERICK-ZABALA ➜ ~/.ssh $ cat id_rsa.pub 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0d
+(iosv) @ERICK-ZABALA ➜ ~/.ssh $ 
+
+*** Copy KP to your Server ("File:authorized_keys")
+[opc@jenkins-master ~]$ cd ~/.ssh
+[opc@jenkins-master .ssh]$ ls
+authorized_keys  id_rsa  id_rsa.pub  known_hosts
+[opc@jenkins-master .ssh]$ nano authorized_keys 
+[opc@jenkins-master .ssh]$ cat authorized_keys 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0dssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0dssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0d
+
+"""
+
+Remote Host:
+Copy public Key:
+ssh-rsa <your public key>
+
