@@ -1,0 +1,2 @@
+2023-09-01 20:25:01,791 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-01 20:25:01,791 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'

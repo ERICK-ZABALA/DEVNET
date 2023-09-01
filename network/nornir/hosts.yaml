@@ -1,9 +1,12 @@
 ---
-oracle-01:
+linux-server:
     hostname: '155.248.226.213'
     port: 22
     username: 'opc'
+    connection_options:
+        netmiko:
+            extras:
+                use_keys: True
+                key_file: '/home/codespace/.ssh/id_rsa'
     platform: 'linux'
-    use_keys: True
-    key_file: '/home/codespace/.ssh/id_rsa'
 

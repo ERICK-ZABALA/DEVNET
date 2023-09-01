@@ -17,7 +17,4 @@ config = net_connect.send_config_set(['export TRIAL="AAB62"', 'echo $TRIAL'])
 print(config)
 
 
-
-
-
 net_connect.disconnect()

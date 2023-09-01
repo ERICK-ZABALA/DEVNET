@@ -1,13 +1,15 @@
+#!/workspaces/DEVNET/network/iosv/bin/python
 
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_command
-from nornir.plugins.functions.text import print_result
+from nornir_netmiko import netmiko_send_command
+from nornir_utils.plugins.functions import print_result
 
-nr = InitNornir(config_file="hosts.yaml")
+nr = InitNornir(logging={"log_file": "mylogs", "level": "DEBUG"})
 
 result = nr.run(
-    task=netmiko_send_command,
-    command_string= 'ls -ll'
+    task = netmiko_send_command,
+    command_string= "ls"
 )
 
 print_result(result)
+
