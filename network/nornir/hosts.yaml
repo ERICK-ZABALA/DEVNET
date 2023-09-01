@@ -1,0 +1,9 @@
+---
+oracle-01:
+    hostname: '155.248.226.213'
+    port: 22
+    username: 'opc'
+    platform: 'linux'
+    use_keys: True
+    key_file: '/home/codespace/.ssh/id_rsa'
+
