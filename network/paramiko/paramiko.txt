@@ -1,8 +1,10 @@
+**** PARAMIKO ****
+
 Paramiko is a library to work specific for SSHv2
 pip install Paramiko
 
 
-(iosv) @ERICK-ZABALA ➜ /workspaces/DEVNET/network/paramiko (main) $ pip list
+(iosv) ➜ paramiko (main) $ pip list
 Package      Version
 ------------ -------
 bcrypt       4.0.1
@@ -16,11 +18,11 @@ pycparser    2.21
 PyNaCl       1.5.0
 setuptools   63.2.0
 
-# Paramiko can be used to admin servers using ssh v2
+# Paramiko can be used to admin servers using SSHv2
 
 command: ssh-keygen -t rsa
 
-this command generate a public key in the directory ~/.ssh 
+this command generate a public key in the directory ~/.ssh called id_rsa.pub
 also a private key called "id_rsa"
 
 private key = password (similar to the password)
@@ -38,7 +40,13 @@ ssh-rsa <your public key>
 Host Python Machine:
 Key Public
 
- $ (iosv) @ERICK-ZABALA ➜ /workspaces/DEVNET/network/paramiko (main) $ ssh-keygen -t rsa
+CLIENT
+HOST PYTHON
+
+'command' : 'ssh-keygen -t rsa'
+
+$ (iosv) @ERICK-ZABALA ➜ /workspaces/DEVNET/network/paramiko (main) $ ssh-keygen -t rsa
+
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/codespace/.ssh/id_rsa): 
 Enter passphrase (empty for no passphrase): 
@@ -46,7 +54,7 @@ Enter same passphrase again:
 Your identification has been saved in /home/codespace/.ssh/id_rsa
 Your public key has been saved in /home/codespace/.ssh/id_rsa.pub
 The key fingerprint is:
-SHA256:99JFSO+3fEklnyIQsdQ+ua48kCXnjuCilniVFOD1moo codespace@codespaces-b04c0d
+SHA256:JFSO+3fEklnyIQsdQ+ua48kCXnjuCilniVFOD1moo codespace@codespaces-b04c0d
 The key's randomart image is:
 +---[RSA 3072]----+
 |  ...    +o .    |
@@ -63,16 +71,21 @@ The key's randomart image is:
 (iosv) @ERICK-ZABALA ➜ ~/.ssh $ ls
 authorized_keys  id_rsa  id_rsa.pub  known_hosts
 (iosv) @ERICK-ZABALA ➜ ~/.ssh $ cat id_rsa.pub 
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0d
+ssh-rsa C1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0d
 (iosv) @ERICK-ZABALA ➜ ~/.ssh $ 
 
-*** Copy KP to your Server ("File:authorized_keys")
+SERVER WEB
+**** Copy KP to your Server ("File:authorized_keys") ****
 [opc@jenkins-master ~]$ cd ~/.ssh
+
 [opc@jenkins-master .ssh]$ ls
+
 authorized_keys  id_rsa  id_rsa.pub  known_hosts
+
 [opc@jenkins-master .ssh]$ nano authorized_keys 
+
 [opc@jenkins-master .ssh]$ cat authorized_keys 
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0dssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0dssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0d
+ssh-rsa C1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0dssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0dssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2ocDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zkKVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48zo4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsYeZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2YjjC1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b04c0d
 
 """
 
@@ -80,3 +93,70 @@ Remote Host:
 Copy public Key:
 ssh-rsa <your public key>
 
+### CONFIGURATION PUBLIC KEY SSH TO ROUTER CISCO ###
+###
+CLIENT 
+PYTHON
+
+@ERICK-ZABALA ➜ ~/.ssh $ ls
+authorized_keys  id_rsa  id_rsa.pub  known_hosts
+@ERICK-ZABALA ➜ ~/.ssh $ 
+
+@ERICK-ZABALA ➜ ~/.ssh $ fold -b -w 72 id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2o
+cDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE
+7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zk
+KVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr
+0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48z
+o4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsY
+eZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2Yjj
+C1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8= codespace@codespaces-b0
+4c0d
+
+key: to paste router >>>
+
+AAAAB3NzaC1yc2EAAAADAQABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2o
+cDjawFVZjgIOBUhS43sRRZq/mVQhCREhOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE
+7J2P05qADHqY/Ga/8a+QwBikGUWyIl0WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zk
+KVyIeFjwiH/VWtVZGhDzb9TYeBfqwtWpSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr
+0lFncDjDYJ3TGNKpdRXytO0AeU+ymxshurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48z
+o4K23QiZOqXXnsh/cE8CuU5UYgrPcGX0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsY
+eZky7Pxs1s0omHjyx4AaWYGU9k1tCnmSH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2Yjj
+C1gjbrqlI67VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8=
+
+CSR1000V>en
+CSR1000V#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+CSR1000V(config)#ip ssh pubkey-chain 
+CSR1000V(conf-ssh-pubkey)#username devnet
+CSR1000V(conf-ssh-pubkey-user)#key-string 
+CSR1000V(conf-ssh-pubkey-data)#$QABAAABgQDO5RThsWnNqWYomwKAyahK3yy201tmpp2o  
+CSR1000V(conf-ssh-pubkey-data)#$hOzpbHAw1BfuEB/ZTd4ifpuWP7popjAFlOy7vDmhE    
+CSR1000V(conf-ssh-pubkey-data)#$WiHaqFrMdGJF3xQSotAIusNVRv/dXi4QdDqQ7Q8zk    
+CSR1000V(conf-ssh-pubkey-data)#$pSYjP2cDHFhkTgi1oRwFBF5mO/Bpk5QG4gau9+ibr    
+CSR1000V(conf-ssh-pubkey-data)#$hurwQehCnBjQyrE9ELpvjz23AQDWrCak8j04nr48z    
+CSR1000V(conf-ssh-pubkey-data)#$0HK7fJvi7B3+ym/K/nbg8UL12LfkORPpf/SsftFsY    
+CSR1000V(conf-ssh-pubkey-data)#$SH98j02Kxpd8t5SC8yjtnmPCwW0pdlkzy6PTV2Yjj    
+CSR1000V(conf-ssh-pubkey-data)#$VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8=        
+CSR1000V(conf-ssh-pubkey-data)#exit
+CSR1000V(conf-ssh-pubkey-user)#exit
+CSR1000V(conf-ssh-pubkey)#exit
+CSR1000V(config)#do sh run | sec pubkey
+ip ssh pubkey-chain
+  username devnet
+   key-hash ssh-rsa 9016CC1872FC6D1771F74872303883F5
+
+####
+
+@ERICK-ZABALA ➜ ~/.ssh $ ssh -p 922 devnet@34.125.97.207
+CSR1000V#
+
+*** Check fingerprint via linux
+@ERICK-ZABALA ➜ ~/.ssh $ ssh-keygen -l -f id_rsa.pub
+3072 SHA256:99JFSO+3fEklnyIQsdQ+ua48kCXnjuCilniVFOD1moo codespace@codespaces-b04c0d (RSA)
+@ERICK-ZABALA ➜ ~/.ssh $ 
+
+####
+info:
++ https://www.youtube.com/watch?v=3LxxO6nXEcI
++ https://networklessons.com/uncategorized/ssh-public-key-authentication-cisco-ios

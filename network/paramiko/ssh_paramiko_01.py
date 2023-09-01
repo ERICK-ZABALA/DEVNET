@@ -1,4 +1,4 @@
-#!/workspaces/DEVNET/network/iosv/bin/python
+#! /workspaces/DEVNET/network/iosv/bin/python
 
 """
 First Paramiko Program
@@ -7,28 +7,30 @@ Environment: EVE-NG
 Router: CSR1000V
 Library: paramiko
 """
-import paramiko, time
+import paramiko
+import time, json
 
-devices = {
-    'csr1k-01': {'prompt':'CSR1000V#', 'ip':'34.125.235.12', 'port':'922', 'username':'devnet', 'password':'devnet'}, 
-    'csr1k-02': {'prompt':'CSR1000V#', 'ip':'34.125.235.12', 'port':'822', 'username':'devnet', 'password':'devnet'}
-}
+with open('devices.json', 'r') as f:
+    devices = json.load(f)
 
-commands = [ 'show version', 'show run']
+print(devices)
 
-key = paramiko.RSAKey.from_private_key_file('/workspaces/DEVNET/network/paramiko/.ssh/id_rsa')
+with open('commands.txt', 'r') as f:
+    commands = f.readlines()
 
+print(commands)
 
-def clear_buffer(connection):
-    if connection.recv_ready():
-        return connection.recv(max_buffer)
+# copy the public key in the folder .ssh in your remote SERVER or ROUTER
+key = paramiko.RSAKey.from_private_key_file('/home/codespace/.ssh/id_rsa')
 
-for device in devices.items():
+for device in devices.keys():
     connection = paramiko.SSHClient()
     connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    
     connection.connect(devices[device]['ip'], 
                        username=devices[device]['username'], 
-                       password=devices[device]['password'],
+                       port=devices[device]['ip'],  
+                       pkey=key,
                        look_for_keys=False,
                        allow_agent=False)
 

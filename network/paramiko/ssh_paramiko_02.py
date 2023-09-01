@@ -7,7 +7,7 @@ Environment: EVE-NG
 Router: CSR1000V
 Library: paramiko
 """
-import paramiko, time
+import paramiko
 
 devices = {
     'oracle-01': {'prompt':'[opc@jenkins-master]', 'ip':'155.248.226.213', 'username':'opc', 'port':'22'} 
