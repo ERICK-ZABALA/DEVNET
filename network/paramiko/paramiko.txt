@@ -141,11 +141,18 @@ CSR1000V(conf-ssh-pubkey-data)#$VKoGU4GCCwkPI9+nqDaxN5nM7Rdu6IO6RIp8=
 CSR1000V(conf-ssh-pubkey-data)#exit
 CSR1000V(conf-ssh-pubkey-user)#exit
 CSR1000V(conf-ssh-pubkey)#exit
-CSR1000V(config)#do sh run | sec pubkey
+
+# CONFIGURACION COMPLETA SSH PUBLIC KEY
+
+CSR1000V>en
+CSR1000V#sh run | sec ssh
+ip ssh source-interface GigabitEthernet1
+ip ssh version 2
 ip ssh pubkey-chain
   username devnet
-   key-hash ssh-rsa 9016CC1872FC6D1771F74872303883F5
-
+   key-hash ssh-rsa 9016CC1872FC6D1771F74872303883F5 
+ip ssh server algorithm hostkey ssh-rsa
+ transport input ssh
 ####
 
 @ERICK-ZABALA ➜ ~/.ssh $ ssh -p 922 devnet@34.125.97.207
