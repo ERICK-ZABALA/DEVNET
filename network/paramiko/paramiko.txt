@@ -179,3 +179,15 @@ IOS Keys in SECSH format(ssh-rsa, base64 encoded): TP-self-signed-3781405700
 info:
 + https://www.youtube.com/watch?v=3LxxO6nXEcI
 + https://networklessons.com/uncategorized/ssh-public-key-authentication-cisco-ios
+####
+
+##############
+Is not neccesary
+Location: ~/.ssh
+File: config
+"
+Host *
+        HostbasedAcceptedAlgorithms -rsa-sha2-256,-rsa-sha2-512
+        HostKeyAlgorithms -rsa-sha2-256,-rsa-sha2-512
+        PubkeyAcceptedAlgorithms -rsa-sha2-256,-rsa-sha2-512
+"
