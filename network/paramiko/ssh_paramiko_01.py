@@ -17,11 +17,12 @@ with open('devices.json', 'r') as f:
 
 print(devices)
 
+
 with open('commands.txt', 'r') as f:
     commands = f.readlines()
 
 print(commands)
-
+    
 # Define una lista de algoritmos que deseas deshabilitar
 #disabled_algorithms = {
 #    'kex': ['ecdh-sha2-nistp256', 'ecdh-sha2-nistp384'],
@@ -57,8 +58,12 @@ for device in devices.keys():
     time.sleep(3)
     output = new_connection.recv(5000)
     print(output)
-
-
+    
+    for command in commands:
+        print(command)
+        new_connection.send(command)
+        time.sleep(3)
+    
     new_connection.close()
     
 

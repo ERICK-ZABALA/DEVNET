@@ -1,5 +1,12 @@
 config t
-logging buffered 30000
+logging buffered 40000
+interface Gi1
+description Interface MGMT
+exit
+interface loop0
+ip address 20.20.20.1 255.255.255.0
+no shu
+exit
 end
 wr
 

@@ -191,3 +191,8 @@ Host *
         HostKeyAlgorithms -rsa-sha2-256,-rsa-sha2-512
         PubkeyAcceptedAlgorithms -rsa-sha2-256,-rsa-sha2-512
 "
+
+##############
+Nota: La entrega de los comandos al router no es inmediata se debe ajustar time.sleeps para 
+que la configuracion se aplique al equipo, generando delay en la aplicacion de los comandos
+##############
