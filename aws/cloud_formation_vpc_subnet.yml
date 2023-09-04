@@ -1,0 +1,24 @@
+#(venv) $ aws --region us-west-1 cloudformation create-stack --stack-name mpn-ch10-demo-2 --template-body file://cloud_formation_vpc_subnet.yml
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create subnet in us-west-1
+Resources:
+  myVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: '10.1.0.0/16'
+      EnableDnsSupport: 'false'
+      EnableDnsHostnames: 'false'
+      Tags:
+        - Key: Name
+          Value: 'mastering_python_networking_demo_2'
+  mySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref myVPC
+      CidrBlock: '10.1.0.0/24'
+      AvailabilityZone: 'us-west-1a'
+      Tags:
+        - Key: Name
+        Value: 'mpn_demo_subnet_1'
+

@@ -1,0 +1,12 @@
+---
+
+ansible_host: 10.10.20.173
+ansible_telnet: yes
+ansible_user: cisco
+ansible_password: cisco
+ansible_connection: network_cli
+ansible_network_os: ios
+ansbile_become: yes
+ansible_python_interpreter: /usr/bin/python3
+ansible_become_method: enable
+ansible_become_pass: cisco

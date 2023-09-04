@@ -1,0 +1,9 @@
+[core-devices]
+core-rtr01
+core-rtr02
+[dist-devices]
+dist-rtr01
+dist-rtr01
+[dist-devices]
+dist-sw01
+dist-sw02

@@ -1,0 +1,19 @@
+# RUN CLI: aws --region us-west-1 cloudformation 
+# create-stack --stack-name 'mpn- ch10-demo' 
+# --template-body file://cloud_formation_vpc.yml
+# aws --region us-west-1 cloudformation create-stack --stack-name 'mpn- ch10-demo' --template-body file://cloud_formation_vpc.yml
+# VERIFY:
+# aws --region us-west-1 cloudformation describe-stacks --stackname mpn-ch10-demo
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create VPC in us-west-1
+Resources:
+  myVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: '10.1.0.0/16'
+      EnableDnsSupport: 'false'
+      EnableDnsHostnames: 'false'
+      Tags:
+        - Key: Name
+        - Value: 'networking_demo_2'
