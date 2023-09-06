@@ -96,7 +96,210 @@ echo "$password" | su -c "python3 /home/devnet/devnet/DEVNET/jenkins/conx_telnet
 
 ![Alt text](image-2.png)
 
-### Dar permisos sudo a usuario jenkins como root (no recomendado)
+# Configure Trigger (CRON) Linux via Jenkins
+
+![Alt text](image-3.png)
+
+# SMTP 
+
+Set Google Account:
+
+1. security
+![Alt text](images/image-4.png)
+2. second step verification
+![Alt text](images/image-5.png)
+3. App passwords
+![Alt text](images/image-6.png)
+4. App Jenkins
+![Alt text](images/image-7.png)
+5. Account Generated
+![Alt text](images/image-8.png)
+
+umrrlfaerlqmwzjl
+Dashboard > Manage Jenkins > Configure System > E-mail Notification > Advanced Settings
+
+![Alt text](images/image-9.png)
+
+# Post Build Actions Jenkins
+
+![Post Build Actions](images/image-10.png)
+
+![Alt text](images/image-11.png)
+
+# PLUGINS
+
+![Plugins](images/image-12.png)
+
+![Alt text](images/image-13.png)
+
+![Alt text](images/image-14.png)
+
+![Alt text](images/image-15.png)
+
+# GIT & Jenkins
+
+run: ansible
+$ ansible-playbook -i hosts playbook_02.yml
+
+Then go to global configuration
+
+Manage Configuration > Tools
+
+![Alt text](image-b.png)
+
+![Alt text](image-b1.png)
+
+# Install NGROK
+
+ curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+
+devnet@PC1 ~/devnet/DEVNET/jenkins $ ls
+ansible                  credentials.txt  images                           routers.json
+conx_telnet_rtr01.py     image-b1.png     ngrok-v3-stable-linux-amd64.tgz
+conx_telnet_rtr01_v2.py  image-b.png      readme.md
+
+devnet@PC1 ~/devnet/DEVNET/jenkins $ sudo tar xvzf ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
+[sudo] password for devnet: 
+ngrok
+
+devnet@PC1 ~/devnet/DEVNET/jenkins $ ngrok --version
+ngrok version 3.3.4
+
+ngrok config add-authtoken 2V28XJi5G3L03QvTG3b
+
+ngrok http 8080
+
+https://5e0f-192-226-134-67.ngrok-free.app
+
+
+openssl pkcs8 -topk8 -inform PEM -outform PEM -in jenkins-linux-wsl.2023-09-06.private-key.pem -out converted-github-app.pem -nocrypt
+
+386520
+https://github.com/ERICK-ZABALA/Test.git
+
+# Jenkins Python
+
+$ pip install python-jenkins
+
+devnet@PC1 ~/devnet/DEVNET/jenkins $ pip install python-jenkINS
+
+Defaulting to user installation because normal site-packages is not writeable
+DEPRECATION: Loading egg at /usr/local/lib/python3.11/dist-packages/scapy-2.5.0.dev150-py3.11.egg is deprecated. pip 23.3 will enforce this behaviour change. A possible replacement is to use pip for package installation..
+Collecting python-jenkINS
+  Obtaining dependency information for python-jenkINS from https://files.pythonhosted.org/packages/85/05/dcde544581c549ab60fdb9e3908201194b1fec7ac0e349fcebe1f18ad054/python_jenkins-1.8.1-py3-none-any.whl.metadata
+  Downloading python_jenkins-1.8.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting multi-key-dict (from python-jenkINS)
+  Downloading multi_key_dict-2.0.3.zip (9.9 kB)
+  Preparing metadata (setup.py) ... done
+Collecting pbr>=0.8.2 (from python-jenkINS)
+  Downloading pbr-5.11.1-py2.py3-none-any.whl (112 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.7/112.7 kB 107.2 kB/s eta 0:00:00
+Requirement already satisfied: requests in /usr/lib/python3/dist-packages (from python-jenkINS) (2.31.0)
+Collecting setuptools<66 (from python-jenkINS)
+  Downloading setuptools-65.7.0-py3-none-any.whl (1.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 778.5 kB/s eta 0:00:00
+Requirement already satisfied: six>=1.3.0 in /usr/lib/python3/dist-packages (from python-jenkINS) (1.16.0)
+Downloading python_jenkins-1.8.1-py3-none-any.whl (27 kB)
+Building wheels for collected packages: multi-key-dict
+  Building wheel for multi-key-dict (setup.py) ... done
+  Created wheel for multi-key-dict: filename=multi_key_dict-2.0.3-py3-none-any.whl size=9283 sha256=5393fe28b47b425cef8e54c7455ac59767562537331a8b0fb842d477719e749f
+  Stored in directory: /home/devnet/.cache/pip/wheels/b7/86/6a/b0b1ffcbb5a919b6ce66d39a76e67dcbefb334e73d5e62e96a
+Successfully built multi-key-dict
+Installing collected packages: multi-key-dict, setuptools, pbr, python-jenkINS
+  WARNING: The script pbr is installed in '/home/devnet/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed multi-key-dict-2.0.3 pbr-5.11.1 python-jenkINS-1.8.1 setuptools-65.7.0
+
+devnet@PC1 ~/devnet/DEVNET/jenkins $ python3
+Python 3.11.4 (main, Jun  7 2023, 10:13:09) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import jenkins
+>>> server = jenkins.Jenkins('http://172.30.157.251:8080/', username='admin', password='C1sc0123!')
+>>> user = server.get_whoami()
+>>> version = server.get_version()
+>>> print('Hello %s from Jenkins %s' % (user['fullName'], version))
+Hello ERICK ZABALA from Jenkins 2.414.1
+
+>>> plugin = server.get_plugins_info()
+>>> plugin
+[{'active': True, 'backupVersion': None, 'bundled': False, 'deleted': False, 'dependencies': [{'optional': False, 'shortName': 'commons-lang3-api', 'version': '3.13.0-62.v7d18e55f51e2'}, {'optional': False, 'shortName': 'okhttp-api', 'version': '4.11.0-157.v6852a_a_fa_ec11'}, {'optional': False, 'shortName': 'instance-identity'}]
+
+>>> job = server.get_job_config('sandbox_git_example_03')
+>>> import pprint
+>>> pprint.pprint(job)
+
+("<?xml version='1.1' encoding='UTF-8'?>\n"
+ '<project>\n'
+ '  <actions/>\n'
+ '  <description>Integration git jenkins ansible sandbox cisco</description>\n'
+ '  <keepDependencies>false</keepDependencies>\n'
+ '  <properties/>\n'
+ '  <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.0">\n'
+ '    <configVersion>2</configVersion>\n'
+ '    <userRemoteConfigs>\n'
+ '      <hudson.plugins.git.UserRemoteConfig>\n'
+ '        <url>https://github.com/ERICK-ZABALA/Test.git</url>\n'
+ '        <credentialsId>Git Hub Jenkins WSL Linux</credentialsId>\n'
+ '      </hudson.plugins.git.UserRemoteConfig>\n'
+ '    </userRemoteConfigs>\n'
+ '    <branches>\n'
+ '      <hudson.plugins.git.BranchSpec>\n'
+ '        <name>*/main</name>\n'
+ '      </hudson.plugins.git.BranchSpec>\n'
+ '    </branches>\n'
+ '    '
+ '<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>\n'
+ '    <submoduleCfg class="empty-list"/>\n'
+ '    <extensions/>\n'
+ '  </scm>\n'
+ '  <canRoam>true</canRoam>\n'
+ '  <disabled>false</disabled>\n'
+ '  '
+ '<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n'
+ '  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n'
+ '  <triggers/>\n'
+ '  <concurrentBuild>false</concurrentBuild>\n'
+ '  <builders>\n'
+ '    <hudson.tasks.Shell>\n'
+ '      <command>ls\n'
+ 'pwd\n'
+ 'whoami\n'
+ 'ansible --version\n'
+ 'ansible-playbook -i hosts playbook_02.yml\n'
+ 'cat output/hostname_or_ip_1.json\n'
+ 'cat output/hostname_or_ip_1.json</command>\n'
+ '      <configuredLocalRules/>\n'
+ '    </hudson.tasks.Shell>\n'
+ '  </builders>\n'
+ '  <publishers/>\n'
+ '  <buildWrappers/>\n'
+ '</project>')
+>>> exit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+open 443 linux
+
+sudo apt-get install ufw
+sudo ufw enable
+sudo ufw allow 443/tcp
+sudo ufw status
+sudo ufw reload
+
+
++ Dar permisos sudo a usuario jenkins como root (no recomendado)
 
 devnet@PC1 ~/devnet/DEVNET/jenkins $ sudo usermod -aG sudo jenkins
 [sudo] password for devnet: 

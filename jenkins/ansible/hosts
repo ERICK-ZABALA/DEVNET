@@ -1,0 +1,14 @@
+
+ios-devices:
+  hosts:
+    hostname_or_ip_1:
+      ansible_host: "10.10.20.173"
+      ansible_user: "cisco"
+      ansible_password: "cisco"
+    hostname_or_ip_2:
+      ansible_host: "10.10.20.174"
+      ansible_user: "cisco"
+      ansible_password: "cisco"
+  vars:
+    some_var: valor
+    another_var: otro_valor
