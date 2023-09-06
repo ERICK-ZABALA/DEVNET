@@ -1,0 +1,16 @@
+[
+    {
+        "host": "10.10.20.173",
+        "port": 23,
+        "username": "cisco",
+        "password": "cisco",
+        "prompt": "RP/0/RP0/CPU0:core-rtr01#"
+    },
+    {
+        "host": "10.10.20.174",
+        "port": 23,
+        "username": "cisco",
+        "password": "cisco",
+        "prompt": "RP/0/RP0/CPU0:core-rtr02#"
+    }
+]
