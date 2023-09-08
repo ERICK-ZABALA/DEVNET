@@ -13,6 +13,19 @@ class SimpleTest(unittest.TestCase):
         one = 'a'
         two = 'a'
         self.assertEqual(one, two)
+    
+    def testPass(self):
+        self.assertTrue(True, 'this is a Pass message')
+        return
+    def testFail(self):
+        self.assertFalse(False, 'this is a failed message')
+    def testError(self):
+        raise RuntimeError('Test error!')
+    def testAssesrtTrue(self):
+        self.assertTrue(True)
+    def testAssertFalse(self):
+        self.assertFalse(True)
+
 
 """
 .
