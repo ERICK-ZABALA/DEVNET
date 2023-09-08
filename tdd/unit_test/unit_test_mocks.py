@@ -48,6 +48,7 @@ if __name__ == '__main__':
     unittest.main()
 """
 $ python3 unit_test_mocks.py
+
 Valor: {'key1': 'value1'}
 .
 ----------------------------------------------------------------------
