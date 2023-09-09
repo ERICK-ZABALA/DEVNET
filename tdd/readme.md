@@ -37,3 +37,183 @@
 
 • Setup and teardown: Setup encompasses all the necessary preliminary steps for tests, while teardown involves cleaning up after the tests have been executed."
 
+Library Unitest is native of Python.
+
+```python
+import unittest
+
+class SimpleTest(unittest.TestCase):
+    def test(self):
+        one = 'a'
+        two = 'a'
+        self.assertEqual(one, two)
+
+
+```
+
+# PyTest
+
+Pytest is a framework from Python = Developers, QA Engineers, Individuals practicing TDD.
+
+```python
+pip install pytest
+```
+
+```python
+
+Python 3.11.4 (main, Jun  7 2023, 10:13:09) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pytest
+>>> pytest.__version__
+'7.4.2'
+>>> 
+```
+
+# Network Test
+
++ Testing Reachibility
+
+```python
+Python 3.11.4 (main, Jun  7 2023, 10:13:09) [GCC 12.2.0] on lin
+ux                                                             Type "help", "copyright", "credits" or "license" for more infor
+mation.                                                        >>> import os
+>>> host = ['cisco.com','google.com']
+>>> host
+['cisco.com', 'google.com']
+>>> for h in host:
+...     os.system('ping -c 1 ' + h)
+... 
+PING cisco.com (72.163.4.185) 56(84) bytes of data.
+64 bytes from redirect-ns.cisco.com (72.163.4.185): icmp_seq=1 
+ttl=234 time=92.2 ms                                           
+--- cisco.com ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 92.167/92.167/92.167/0.000 ms
+0
+PING google.com (172.217.13.110) 56(84) bytes of data.
+64 bytes from yul02s04-in-f14.1e100.net (172.217.13.110): icmp_
+seq=1 ttl=118 time=24.3 ms                                     
+--- google.com ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 24.319/24.319/24.319/0.000 ms
+0
+>>> 
+
+```
++ Using module subprocess offer additional features.
+
+```python
+Python 3.11.4 (main, Jun  7 2023, 10:13:09) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import subprocess
+>>> host = ["cisco.com", "google.com"]
+>>> for h in host:
+...     print('host:', 'h')
+...     p = subprocess.Popen(['ping', '-c', '1', h], stdout = subprocess.PIPE)
+... 
+host: h
+host: h
+>>> print(p.communicate())
+(b'PING google.com (172.217.13.206) 56(84) bytes of data.\n64 bytes from yul03s05-in-f14.1e100.net (172.217.13.206): icmp_seq=1 ttl=118 time
+=27.8 ms\n\n--- google.com ping statistics ---\n1 packets transmitted, 1 received, 0% packet loss, time 0ms\nrtt min/avg/max/mdev = 27.826/27.826/27.826/0.000 ms\n', None)
+>>> 
+
+```
+# TCP Sync Flood:
+
+sudo apt-get install hping3
+
+```bash
+# DON'T DO THIS IN PRODUCTION #
+
+$ sudo hping3 -S -p 80 --flood 8.8.8.8
+
+HPING 8.8.8.8 (eth0 8.8.8.8): S set, 40 headers + 0 data bytes
+hping in flood mode, no replies will be shown
+^C
+--- 8.8.8.8 hping statistic ---
+32547 packets transmitted, 0 packets received, 100% packet loss
+round-trip min/avg/max = 0.0/0.0/0.0 ms
+```
+
+# Testing for Transaction
+
++ Enable a http server to test layer 7
+
+``` bash
+$ python3 -m http.server 8000
+
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+127.0.0.1 - - [09/Sep/2023 15:00:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [09/Sep/2023 15:00:07] code 404, message File not found
+127.0.0.1 - - [09/Sep/2023 15:00:07] "GET /favicon.ico HTTP/1.1" 404 -
+^C
+Keyboard interrupt received, exiting.
+```
+
+# Jenkins Intengration Test
+
+An invisible engineer who watches for network changes and thoroughly tests everything to prevent issues. Explore integrating pytest with Jenkins.
+
+Install plugin:
+
++ build-name-setter
+
+![Install Build Name Setter](images/image-0.png)
+
++ Test Result Analizer
+
+![Install Test Result Analizer](images/image-1.png)
+
+Test Example:
+
+``` python
+#!/usr/bin/python3
+import pytest
+
+devices = {
+    'nx-osv-1': {
+        'os': 'nxos_version'
+    }
+}
+
+def test_version():
+    assert devices['nx-osv-1']['os'] == "nxos_version"
+
+```
+
+Output:
+
+```bash
+$ python3 -m pytest -v test_device_jenkins.py
+
+    ========= test session starts ==========
+platform linux -- Python 3.11.4, pytest-7.4.2, pluggy-1.3.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/devnet/devnet/DEVNET/tdd/network_test
+plugins: anyio-3.7.0
+collected 1 item                                                            
+
+test_device_jenkins.py::test_version PASSED                                                   [100%]
+    ========= 1 passed in 0.68s ==========
+```
++ generated a result.xml file:
+
+```bash
+python3 -m pytest --junit-xml=result.xml test_device_jenkins.py 
+```
+
+![Project Test Device ](images/image-2.png)
+![Project Test Device](images/image-3.png)
+![Project Test Device](images/image-4.png)
+![Project Test Device](images/image-5.png)
+![Project Test Device](images/image-6.png)
+
++ Result:
+
+![Result - Project Test Device](images/image-7.png)
+![Result - Project Test Device](images/image.png)
+
+# PyATS and Genie
+
+pip install pyats

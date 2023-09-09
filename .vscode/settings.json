@@ -3,5 +3,14 @@
         "editor.defaultFormatter": "ms-python.autopep8"
     },
     "python.formatting.provider": "none",
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./tdd",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
 }
