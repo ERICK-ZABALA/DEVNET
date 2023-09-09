@@ -56,7 +56,9 @@ class SimpleTest(unittest.TestCase):
 Pytest is a framework from Python = Developers, QA Engineers, Individuals practicing TDD.
 
 ```python
+
 pip install pytest
+
 ```
 
 ```python
@@ -121,6 +123,8 @@ host: h
 ```
 # TCP Sync Flood:
 
+To Install hping3 use:
+
 sudo apt-get install hping3
 
 ```bash
@@ -138,7 +142,7 @@ round-trip min/avg/max = 0.0/0.0/0.0 ms
 
 # Testing for Transaction
 
-+ Enable a http server to test layer 7
++ To enable a http server to test layer 7
 
 ``` bash
 $ python3 -m http.server 8000
@@ -155,7 +159,7 @@ Keyboard interrupt received, exiting.
 
 An invisible engineer who watches for network changes and thoroughly tests everything to prevent issues. Explore integrating pytest with Jenkins.
 
-Install plugin:
+Install plugins:
 
 + build-name-setter
 
@@ -197,11 +201,13 @@ collected 1 item
 test_device_jenkins.py::test_version PASSED                                                   [100%]
     ========= 1 passed in 0.68s ==========
 ```
-+ generated a result.xml file:
++ using this comand generate a result.xml file:
 
 ```bash
 python3 -m pytest --junit-xml=result.xml test_device_jenkins.py 
 ```
+
++ You need to create a repository in GitHub to upload your script called test_device_jenkins.py, then create the project in jenkins.
 
 ![Project Test Device ](images/image-2.png)
 ![Project Test Device](images/image-3.png)
@@ -216,4 +222,9 @@ python3 -m pytest --junit-xml=result.xml test_device_jenkins.py
 
 # PyATS and Genie
 
++ Intall PyATS
+
+```python
 pip install pyats
+```
+
