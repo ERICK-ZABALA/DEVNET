@@ -121,6 +121,7 @@ host: h
 >>> 
 
 ```
+
 # TCP Sync Flood:
 
 To Install hping3 use:
@@ -201,11 +202,14 @@ collected 1 item
 test_device_jenkins.py::test_version PASSED                                                   [100%]
     ========= 1 passed in 0.68s ==========
 ```
+
 + using this comand generate a result.xml file:
 
 ```bash
 python3 -m pytest --junit-xml=result.xml test_device_jenkins.py 
 ```
+
+![result.xml](images/imagec.png)
 
 + You need to create a repository in GitHub to upload your script called test_device_jenkins.py, then create the project in jenkins.
 
