@@ -230,6 +230,7 @@ python3 -m pytest --junit-xml=result.xml test_device_jenkins.py
 
 ```python
 pip install pyats
+pip install genie 
 ```
 
 Then you need to generate a test ping using Py ATS using a testbed.yml to connect via ssh to router XR of Cisco - Sandbox.
