@@ -410,17 +410,17 @@ Build Information:
 
 cisco IOS-XRv 9000 () processor
 System uptime is 3 days 12 hours 1 minute
+2023-09-09T21:12:07: %AETEST-INFO: +----------------------------------------------------------------------+
+23-09-09T21:12:07: %AETEST-INFO: |       Starting testcase  PingTestcase                     |                                                  2023-09-09T21:12:07: %AETEST-INFO: +-----------------------------------------------------------------------+
+                                                                                   2023-09-09T21:12:07: %AETEST-INFO: 
+                                                                                    2023-09-09T21:12:07: 
+                                                                                    %AETEST-INFO:  
+                                                                                    Starting section setup                                                                               2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
+                                                                                    2023-09-09T21:12:07: %AETEST-INFO: The result of section setup is => PASSED
 2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: |                        Starting testcase PingTestcase                     
-   |                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: |                            Starting section setup                         
-   |                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: The result of section setup is => PASSED
-2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: |                 Starting section ping[destination=1.1.1.100]              
-   |                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           
+                                                                                    2023-09-09T21:12:07: %AETEST-INFO: |                 
+Starting section ping[destination=1.1.1.100]              +---------------------------------------------------------------------------
+                        
 2023-09-09 21:12:07,608: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': ping +++
 
 2023-09-09 21:12:07,609: %UNICON-WARNING: +++ Reconnecting +++
@@ -428,7 +428,6 @@ System uptime is 3 days 12 hours 1 minute
 Hello there! Hoping you are having a great day
 ... Welcome to 'ansible-cisco.iosxr.iosxr',
 your favorite CISCO.IOSXR.IOSXR Sandbox
-
 
 
 2023-09-09 21:12:08,375: %UNICON-INFO: +++ connection to spawn: ssh -l admin 131.226.217.150 -p 22, id: 1396943
@@ -454,6 +453,7 @@ RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
 2023-09-09 21:12:09,902: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': configure +++
 configure terminal
 Sun Sep 10 01:06:23.203 UTC
+
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#no logging console
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#logging console disable
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#line console
@@ -465,9 +465,11 @@ RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#exec-timeout 0 0
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#absolute-timeout 0
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#session-timeout 0
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#commit
-Sun Sep 10 01:06:24.749 UTC
+
+
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#end
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+
 ping 1.1.1.100
 Sun Sep 10 01:06:25.929 UTC
 Type escape sequence to abort.
@@ -478,9 +480,9 @@ RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
 2023-09-09T21:12:13: %AETEST-INFO: Passed reason: Ping to 1.1.1.100 was successful
 2023-09-09T21:12:13: %AETEST-INFO: The result of section ping[destination=1.1.1.100] is => PASSED
 2023-09-09T21:12:13: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:13: %AETEST-INFO: |               Starting section ping[destination=10.10.20.175]             
-   |                                                                                                           2023-09-09T21:12:13: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           
++                                                                                                           2023-09-09T21:12:13: %AETEST-INFO: |               Starting section ping[destination=10.10.20.175]             
+   |                                                                                                           2023-09-09T21:12:13: %AETEST-INF+---------------------------------------------------------------------------
++                                                                                                           
 2023-09-09 21:12:13,329: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': ping +++
 ping 10.10.20.175
 Sun Sep 10 01:06:26.687 UTC
@@ -497,24 +499,26 @@ RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
    |                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
 ---+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:  SECTIONS/TESTCASES                                                      RES
 ULT                                                                                                            2023-09-09T21:12:14: %AETEST-INFO: ----------------------------------------------------------------------------
-----                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: .
-2023-09-09T21:12:14: %AETEST-INFO: `-- PingTestcase                                                          PA
-SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:     |-- setup                                                             PA
-SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:     |-- ping[destination=1.1.1.100]                                       PA
-SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:     `-- ping[destination=10.10.20.175]                                    PA
-SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: |                                   Summary                                 
-   |                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:  Number of ABORTED                                                          
-  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of BLOCKED                                                          
-  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of ERRORED                                                          
-  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of FAILED                                                           
-  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSED                                                           
-  1                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSX                                                            
-  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of SKIPPED                                                          
-  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Total Number                                                               
-  1                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Success Rate                                                            100
-.0%                                                                                                            2023-09-09T21:12:14: %AETEST-INFO: ----------------------------------------------------------------------------
-----                                                                                                           
-```
+2023-09-09T21:12:14: %AETEST-INFO: .
+2023-09-09T21:12:14: %AETEST-INFO: PingTestcase                                                          
+PASSED                                                                              2023-09-09T21:12:14: 
+PASSED                                                                              2023-09-09T21:12:14: %AETEST-INFO:     
+-- ping[destination=1.1.1.100]                                       
+PASSED                                                                              2023-09-09T21:12:14: %AETEST-INFO:
+ping[destination=10.10.20.175]
+PASSED                                                                              2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
+                                                                                    2023-09-09T21:12:14: Summary                                 
+2023-09-09T21:12:14:+---------------------------------------------------------------------------
+2023-09-09T21:12:14: %AETEST-INFO:  Number of ABORTED                                                          
+0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of BLOCKED                                                          
+0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of ERRORED                                                          
+0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of FAILED                                                           
+0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSED                                                           
+1                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSX                                                            
+0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of SKIPPED                                                          
+0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Total Number                                                               
+1                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Success Rate                                                            100
+.0%
 
+2023-09-09T21:12:14: %AETEST-INFO:                            
+```
