@@ -482,4 +482,4 @@ RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
 ...
 ```
 
-![PyATS Test](imagee.png)
+![PyATS Test](images/imagee.png)
