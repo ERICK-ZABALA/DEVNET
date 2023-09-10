@@ -232,3 +232,289 @@ python3 -m pytest --junit-xml=result.xml test_device_jenkins.py
 pip install pyats
 ```
 
+Then you need to generate a test ping using Py ATS using a testbed.yml to connect via ssh to router XR of Cisco - Sandbox.
+
+![Putty Router XR](images/imaged.png)
+
+Testbed.yml File:
+```yaml
+
+---
+testbed:
+    name: Py-ATS
+    credentials:
+      default:
+          username: admin
+          password: C1sco12345
+
+devices:
+    RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr:
+        alias: RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr
+        type: iosxr
+        os: iosxr
+        connections:
+          defaults:
+            class: unicon.Unicon
+            
+          ssh:
+            protocol: ssh
+            ip: sandbox-iosxr-1.cisco.com
+            port: 22
+            configure: False
+            timeout: 15
+          
+            
+topology:
+    RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr:
+        interfaces:
+            MgmtEth0/RP0/CPU0/0:
+                ipv4: 10.10.20.175/24
+                link: link
+                type: MgmtEth0/RP0/CPU0/0
+            Loopback0:
+                ipv4: 1.1.1.100/32
+                link: "***TEST LOOPBACK****"
+                type: loopback100
+
+```
+Code Python:
+
+``` python
+from pyats.topology import loader
+from pyats import aetest
+from genie import testbed
+
+testbed = loader.load('testbed.yml')
+
+testbed.devices
+
+ios_1 = testbed.devices['RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr']
+ios_1.connect(learn_hostname=True, log_stdout=True)
+
+print('xr is connected = ', ios_1.connected)
+
+print('ios versionn = ', ios_1.execute('show version'))
+
+ios_1.disconnect()
+
+class PingTestcase(aetest.Testcase):
+
+    @aetest.setup
+    def setup(self):
+        self.device = ios_1
+    
+    @aetest.test.loop(destination=('1.1.1.100', '10.10.20.175'))
+    def ping(self, destination):
+        
+        try:
+            result = self.device.ping(destination)
+            if result:
+                self.passed('Ping to {} was successful'.format(destination))
+            else:
+                self.failed('Ping to {} failed'.format(destination))
+        except Exception as e:
+            self.failed('Error while pinging {}: {}'.format(destination, str(e)))
+
+if __name__ == '__main__':
+    aetest.main()
+```
+
++ Output: 
+
+``` bash
+
+$ python3 cnx_device_pyats_02.py --testbed cnx_device_pyats_02.py
+
+2023-09-09 21:11:50,859: %UNICON-INFO: +++ RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr logfile /tmp/RP_0_RP0_CPU0_a
+nsible-cisco_iosxr_iosxr-cli-20230909T211150858.log +++                                                        
+2023-09-09 21:11:50,859: %UNICON-INFO: +++ Unicon plugin iosxr (unicon.plugins.iosxr) +++
+
+Hello there! Hoping you are having a great day
+... Welcome to 'ansible-cisco.iosxr.iosxr',
+your favorite CISCO.IOSXR.IOSXR Sandbox
+
+
+
+2023-09-09 21:11:51,647: %UNICON-INFO: +++ connection to spawn: ssh -l admin 131.226.217.150 -p 22, id: 1396943
+48149328 +++                                                                                                   
+2023-09-09 21:11:51,647: %UNICON-INFO: connection to RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr
+(admin@131.226.217.150) Password: 
+
+
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+
+2023-09-09 21:11:52,217: %UNICON-INFO: Learned hostname(s): 'ansible-cisco.iosxr.iosxr'.
+
+2023-09-09 21:11:52,218: %UNICON-INFO: +++ initializing handle +++
+
+2023-09-09 21:11:52,366: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': executing command 'termina
+l length 0' +++                                                                                                terminal length 0
+Sun Sep 10 01:06:05.494 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+
+2023-09-09 21:11:52,764: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': executing command 'termina
+l width 0' +++                                                                                                 terminal width 0
+Sun Sep 10 01:06:05.891 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+
+2023-09-09 21:11:53,019: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': configure +++
+configure terminal
+Sun Sep 10 01:06:06.286 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#no logging console
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#logging console disable
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#line console
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#exec-timeout 0 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#absolute-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#session-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#line default
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#exec-timeout 0 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#absolute-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#session-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#commit
+Sun Sep 10 01:06:07.731 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#end
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+xrd1 is connected =  True
+
+2023-09-09 21:11:56,339: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': executing command 'show ve
+rsion' +++                                                                                                     show version
+Sun Sep 10 01:06:09.467 UTC
+Cisco IOS XR Software, Version 7.3.2
+Copyright (c) 2013-2021 by Cisco Systems, Inc.
+
+Build Information:
+ Built By     : ingunawa
+ Built On     : Wed Oct 13 20:00:36 PDT 2021
+ Built Host   : iox-ucs-017
+ Workspace    : /auto/srcarchive17/prod/7.3.2/xrv9k/ws
+ Version      : 7.3.2
+ Location     : /opt/cisco/XR/packages/
+ Label        : 7.3.2-0
+
+cisco IOS-XRv 9000 () processor
+System uptime is 3 days 12 hours 1 minute
+
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+Sun Sep 10 01:06:09.467 UTC
+Cisco IOS XR Software, Version 7.3.2
+Copyright (c) 2013-2021 by Cisco Systems, Inc.
+
+Build Information:
+ Built By     : ingunawa
+ Built On     : Wed Oct 13 20:00:36 PDT 2021
+ Built Host   : iox-ucs-017
+ Workspace    : /auto/srcarchive17/prod/7.3.2/xrv9k/ws
+ Version      : 7.3.2
+ Location     : /opt/cisco/XR/packages/
+ Label        : 7.3.2-0
+
+cisco IOS-XRv 9000 () processor
+System uptime is 3 days 12 hours 1 minute
+2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: |                        Starting testcase PingTestcase                     
+   |                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: |                            Starting section setup                         
+   |                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: The result of section setup is => PASSED
+2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: |                 Starting section ping[destination=1.1.1.100]              
+   |                                                                                                           2023-09-09T21:12:07: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           
+2023-09-09 21:12:07,608: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': ping +++
+
+2023-09-09 21:12:07,609: %UNICON-WARNING: +++ Reconnecting +++
+
+Hello there! Hoping you are having a great day
+... Welcome to 'ansible-cisco.iosxr.iosxr',
+your favorite CISCO.IOSXR.IOSXR Sandbox
+
+
+
+2023-09-09 21:12:08,375: %UNICON-INFO: +++ connection to spawn: ssh -l admin 131.226.217.150 -p 22, id: 1396943
+42974288 +++                                                                                                   
+2023-09-09 21:12:08,376: %UNICON-INFO: connection to ansible-cisco.iosxr.iosxr
+(admin@131.226.217.150) Password: 
+
+
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+
+2023-09-09 21:12:08,947: %UNICON-INFO: +++ initializing handle +++
+
+2023-09-09 21:12:09,247: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': executing command 'termina
+l length 0' +++                                                                                                terminal length 0
+Sun Sep 10 01:06:22.378 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+
+2023-09-09 21:12:09,646: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': executing command 'termina
+l width 0' +++                                                                                                 terminal width 0
+Sun Sep 10 01:06:22.774 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+
+2023-09-09 21:12:09,902: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': configure +++
+configure terminal
+Sun Sep 10 01:06:23.203 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#no logging console
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#logging console disable
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config)#line console
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#exec-timeout 0 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#absolute-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#session-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#line default
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#exec-timeout 0 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#absolute-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#session-timeout 0
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#commit
+Sun Sep 10 01:06:24.749 UTC
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr(config-line)#end
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+ping 1.1.1.100
+Sun Sep 10 01:06:25.929 UTC
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 1.1.1.100, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+2023-09-09T21:12:13: %AETEST-INFO: Passed reason: Ping to 1.1.1.100 was successful
+2023-09-09T21:12:13: %AETEST-INFO: The result of section ping[destination=1.1.1.100] is => PASSED
+2023-09-09T21:12:13: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:13: %AETEST-INFO: |               Starting section ping[destination=10.10.20.175]             
+   |                                                                                                           2023-09-09T21:12:13: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           
+2023-09-09 21:12:13,329: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': ping +++
+ping 10.10.20.175
+Sun Sep 10 01:06:26.687 UTC
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.10.20.175, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/2 ms
+RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
+2023-09-09T21:12:14: %AETEST-INFO: Passed reason: Ping to 10.10.20.175 was successful
+2023-09-09T21:12:14: %AETEST-INFO: The result of section ping[destination=10.10.20.175] is => PASSED
+2023-09-09T21:12:14: %AETEST-INFO: The result of testcase PingTestcase is => PASSED
+2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: |                               Detailed Results                            
+   |                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:  SECTIONS/TESTCASES                                                      RES
+ULT                                                                                                            2023-09-09T21:12:14: %AETEST-INFO: ----------------------------------------------------------------------------
+----                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: .
+2023-09-09T21:12:14: %AETEST-INFO: `-- PingTestcase                                                          PA
+SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:     |-- setup                                                             PA
+SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:     |-- ping[destination=1.1.1.100]                                       PA
+SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:     `-- ping[destination=10.10.20.175]                                    PA
+SSED                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: |                                   Summary                                 
+   |                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
+---+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:  Number of ABORTED                                                          
+  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of BLOCKED                                                          
+  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of ERRORED                                                          
+  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of FAILED                                                           
+  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSED                                                           
+  1                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSX                                                            
+  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Number of SKIPPED                                                          
+  0                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Total Number                                                               
+  1                                                                                                            2023-09-09T21:12:14: %AETEST-INFO:  Success Rate                                                            100
+.0%                                                                                                            2023-09-09T21:12:14: %AETEST-INFO: ----------------------------------------------------------------------------
+----                                                                                                           
+```
+

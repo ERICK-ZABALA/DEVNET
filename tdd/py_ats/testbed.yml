@@ -1,0 +1,37 @@
+
+---
+testbed:
+    name: Py-ATS
+    credentials:
+      default:
+          username: admin
+          password: C1sco12345
+
+devices:
+    RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr:
+        alias: RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr
+        type: iosxr
+        os: iosxr
+        connections:
+          defaults:
+            class: unicon.Unicon
+            
+          ssh:
+            protocol: ssh
+            ip: sandbox-iosxr-1.cisco.com
+            port: 22
+            configure: False
+            timeout: 15
+          
+            
+topology:
+    RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr:
+        interfaces:
+            MgmtEth0/RP0/CPU0/0:
+                ipv4: 10.10.20.175/24
+                link: link
+                type: MgmtEth0/RP0/CPU0/0
+            Loopback0:
+                ipv4: 1.1.1.100/32
+                link: "***TEST LOOPBACK****"
+                type: loopback100
