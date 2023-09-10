@@ -479,46 +479,7 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
 2023-09-09T21:12:13: %AETEST-INFO: Passed reason: Ping to 1.1.1.100 was successful
 2023-09-09T21:12:13: %AETEST-INFO: The result of section ping[destination=1.1.1.100] is => PASSED
-2023-09-09T21:12:13: %AETEST-INFO: +---------------------------------------------------------------------------
-+                                                                                                           2023-09-09T21:12:13: %AETEST-INFO: |               Starting section ping[destination=10.10.20.175]             
-   |                                                                                                           2023-09-09T21:12:13: %AETEST-INF+---------------------------------------------------------------------------
-+                                                                                                           
-2023-09-09 21:12:13,329: %UNICON-INFO: +++ ansible-cisco.iosxr.iosxr with via 'ssh': ping +++
-ping 10.10.20.175
-Sun Sep 10 01:06:26.687 UTC
-Type escape sequence to abort.
-Sending 5, 100-byte ICMP Echos to 10.10.20.175, timeout is 2 seconds:
-!!!!!
-Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/2 ms
-RP/0/RP0/CPU0:ansible-cisco.iosxr.iosxr#
-2023-09-09T21:12:14: %AETEST-INFO: Passed reason: Ping to 10.10.20.175 was successful
-2023-09-09T21:12:14: %AETEST-INFO: The result of section ping[destination=10.10.20.175] is => PASSED
-2023-09-09T21:12:14: %AETEST-INFO: The result of testcase PingTestcase is => PASSED
-2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: |                               Detailed Results                            
-   |                                                                                                           2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
----+                                                                                                           2023-09-09T21:12:14: %AETEST-INFO:  SECTIONS/TESTCASES                                                      RES
-ULT                                                                                                            2023-09-09T21:12:14: %AETEST-INFO: ----------------------------------------------------------------------------
-2023-09-09T21:12:14: %AETEST-INFO: .
-2023-09-09T21:12:14: %AETEST-INFO: PingTestcase                                                          
-PASSED                                                                              2023-09-09T21:12:14: 
-PASSED                                                                              2023-09-09T21:12:14: %AETEST-INFO:     
--- ping[destination=1.1.1.100]                                       
-PASSED                                                                              2023-09-09T21:12:14: %AETEST-INFO:
-ping[destination=10.10.20.175]
-PASSED                                                                              2023-09-09T21:12:14: %AETEST-INFO: +---------------------------------------------------------------------------
-                                                                                    2023-09-09T21:12:14: Summary                                 
-2023-09-09T21:12:14:+---------------------------------------------------------------------------
-2023-09-09T21:12:14: %AETEST-INFO:  Number of ABORTED                                                          
-0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of BLOCKED                                                          
-0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of ERRORED                                                          
-0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of FAILED                                                           
-0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSED                                                           
-1                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of PASSX                                                            
-0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Number of SKIPPED                                                          
-0                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Total Number                                                               
-1                                                                                 2023-09-09T21:12:14: %AETEST-INFO:  Success Rate                                                            100
-.0%
-
-2023-09-09T21:12:14: %AETEST-INFO:                            
+...
 ```
+
+![PyATS Test](imagee.png)
