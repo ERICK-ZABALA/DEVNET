@@ -25,9 +25,14 @@ class Device(db.Model):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Crea las tablas en la base de datos si no existen
-        r1 = Device('lax-dc1-core1', 'Juniper')
-        r2 = Device('sfo-dc1-core1', 'Cisco')
-        db.session.add(r1)
-        db.session.add(r2)
+        #r1 = Device('lax-dc1-core1', 'Juniper')
+        #r2 = Device('sfo-dc1-core1', 'Cisco')
+        #db.session.add(r1)
+        #db.session.add(r2)
+        #db.session.commit()
+        u = User(username='erick')
+        u.set_password('secret')
+        db.session.add(u)
         db.session.commit()
+        
         
