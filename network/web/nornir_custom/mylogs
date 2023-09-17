@@ -1,0 +1,33 @@
+2023-09-16 20:48:12,296 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 20:48:12,296 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 20:48:12,299 - nornir.core.task -    ERROR -      start() - Host 'linux-server': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/ssh_dispatcher.py", line 365, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/base_connection.py", line 425, in __init__
+    self._key_check()
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/base_connection.py", line 526, in _key_check
+    raise ValueError(msg)
+ValueError: 
+use_keys has been set to True, but specified key_file does not exist:
+
+use_keys: True
+key_file: /home/codespace/.ssh/id_rsa
+
+
+2023-09-16 20:49:04,818 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 20:49:04,819 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'

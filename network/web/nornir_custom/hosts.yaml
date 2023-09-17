@@ -1,0 +1,13 @@
+---
+linux-server:
+    hostname: '155.248.226.213'
+    port: 22
+    username: 'opc'
+    connection_options:
+        netmiko:
+            extras:
+                use_keys: True
+                key_file: '/home/devnet/.ssh/id_rsa'
+            timeout_socket: 10  # Aquí se ajusta el timeout en segundos
+    platform: 'linux'
+

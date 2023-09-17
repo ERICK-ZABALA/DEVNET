@@ -114,7 +114,7 @@ if __name__ == '__main__':
     
 ```
 
-# SQL DATA BASE
+# SQL DATA BASE - Connection
 
 
 ```python
@@ -156,27 +156,66 @@ if __name__ == '__main__':
         
 ```
 
-+ Install sqlite3
++ Install SQLite3
 
+```bash
 sudo apt-get install sqlite3
+```
 
 ![Alt text](image-3.png)
 
+```bash
 sqlite3 api.db
-Output:
+```
+
++ Output:
+
 SQLite version 3.42.0 2023-05-16 12:36:15
 Enter ".help" for usage hints.
+
+```bash
 sqlite> SELECT * FROM devices;
+```
+
+```bash
 1|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
 2|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
 3|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
 4|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
+```
+
+```bash
 sqlite> SELECT * FROM devices;
 1|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
 2|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
 3|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
 4|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.7|http://172.16.1.123:5000/devices/
 5|iosv-1|192.168.1.1|172.16.1.225|spine|Cisco|2.5|http://172.16.1.123:5000/devices/
+```
+
+```bash
+sqlite> .tables
+```
+
+```bash
+devices
+```
+
+```bash
+sqlite> .schema devices
+CREATE TABLE devices (
+        id INTEGER NOT NULL, 
+        hostname VARCHAR(120), 
+        loopback VARCHAR(40), 
+        mgmt_ip VARCHAR(40), 
+        role VARCHAR(40), 
+        vendor VARCHAR(40), 
+        os VARCHAR(40), 
+        PRIMARY KEY (id)
+);
+CREATE INDEX ix_devices_hostname ON devices (hostname);
+```
+
 sqlite> .exit
 
 + http GET http://172.30.157.251:5000/db/
@@ -245,3 +284,18 @@ Server: Werkzeug/2.3.7 Python/3.11.4
 ]
 
 ```
+
+# Async Operations
+
+Import this libraries:
+
+``` python
+from flask import Flask, jsonify, request, url_for, make_response, copy_current_request_context
+from flask_sqlalchemy import SQLAlchemy
+from nornir_custom.ssh_nornir_server import show_list
+import uuid
+import functools
+import threading import Thread
+
+```
+

@@ -1,0 +1,102 @@
+2023-09-16 20:54:25,229 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 20:54:25,230 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:17:24,787 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:17:24,788 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:20:27,269 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:20:27,270 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:21:27,711 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:21:27,712 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:23:32,723 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:23:32,723 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:25:03,611 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:25:03,612 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:29:41,971 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:29:41,972 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:30:59,813 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:30:59,813 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:35:25,607 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:35:25,607 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:37:05,974 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:37:05,974 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:39:53,400 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:39:53,400 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:40:03,451 - nornir.core.task -    ERROR -      start() - Host 'linux-server': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/base_connection.py", line 1046, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/paramiko/client.py", line 457, in connect
+    server_key = t.get_remote_server_key()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/paramiko/transport.py", line 902, in get_remote_server_key
+    raise SSHException("No existing session")
+paramiko.ssh_exception.SSHException: No existing session
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 26, in netmiko_send_command
+    net_connect = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir_netmiko/connections/netmiko.py", line 59, in open
+    connection = ConnectHandler(**parameters)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/ssh_dispatcher.py", line 365, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/base_connection.py", line 439, in __init__
+    self._open()
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/base_connection.py", line 444, in _open
+    self.establish_connection()
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/base_connection.py", line 1091, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.exceptions.NetmikoTimeoutException: Paramiko: 'No existing session' error: try increasing 'conn_timeout' to 15 seconds or larger.
+
+2023-09-16 23:41:44,556 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:41:44,557 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:43:22,312 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:43:22,312 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:43:27,602 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:43:27,603 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:43:33,172 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:43:33,173 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:49:01,084 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls', 'conn_timeout': 15} on 1 hosts
+2023-09-16 23:49:01,085 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:49:04,791 - nornir.core.task -    ERROR -      start() - Host 'linux-server': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 32, in netmiko_send_command
+    result = net_connect.send_command(command_string, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/utilities.py", line 592, in wrapper_decorator
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BaseConnection.send_command() got an unexpected keyword argument 'conn_timeout'
+
+2023-09-16 23:51:27,366 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls', 'conn_timeout': 15} on 1 hosts
+2023-09-16 23:51:27,367 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:51:31,315 - nornir.core.task -    ERROR -      start() - Host 'linux-server': task 'netmiko_send_command' failed with traceback:
+Traceback (most recent call last):
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir/core/task.py", line 99, in start
+    r = self.task(self, **self.params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/nornir_netmiko/tasks/netmiko_send_command.py", line 32, in netmiko_send_command
+    result = net_connect.send_command(command_string, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/devnet/devnet/DEVNET/network/web/venv/lib/python3.11/site-packages/netmiko/utilities.py", line 592, in wrapper_decorator
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BaseConnection.send_command() got an unexpected keyword argument 'conn_timeout'
+
+2023-09-16 23:55:53,382 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:55:53,383 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
+2023-09-16 23:56:01,475 -  nornir.core -     INFO -        run() - Running task 'netmiko_send_command' with args {'command_string': 'ls'} on 1 hosts
+2023-09-16 23:56:01,476 - nornir.core.task -    DEBUG -      start() - Host 'linux-server': running task 'netmiko_send_command'
