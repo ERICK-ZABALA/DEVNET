@@ -1,6 +1,32 @@
 
 # Docker - Running Flask with Codespaces
 
+Format to lunch an application:
+
+```yaml
+my-flask-app/
+│
+├── app/
+│   ├── __init__.py
+│   ├── routes.py
+│   ├── models.py (si utilizas SQLAlchemy)
+│   ├── templates/ (carpeta para tus plantillas HTML)
+│   │   ├── index.html
+│   │   ├── ...
+│   │
+│   ├── static/ (carpeta para archivos estáticos como CSS, JavaScript, etc.)
+│   │   ├── css/
+│   │   ├── js/
+│   │   ├── images/
+│   │   ├── ...
+│
+├── requirements.txt (lista de dependencias de Python)
+├── Dockerfile (para construir la imagen de Docker)
+├── app.ini (archivo de configuración de uWSGI)
+├── docker-compose.yml (para definir los servicios Docker)
+└── main.py (archivo principal de la aplicación Flask)
+```
+
 + Server Running as a Container
 
 Port: 8080
@@ -102,6 +128,12 @@ docker-compose down --rmi all
 ```bash
 docker-compose ps
 ```
++ Enter to Container to verify files
+
+```bash
+docker exec -it flask /bin/sh
+```
+
 + Firewall Codespace
 
 ```bash
