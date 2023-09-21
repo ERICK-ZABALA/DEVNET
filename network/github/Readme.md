@@ -79,3 +79,79 @@ pycache /
 .AppleDouble
 .LSOverride
  ```
+# GIT ADD & Commit:
+
+```bash
+$ git add .
+$ git add myFile.txt
+$ git commit -m "updated: Add myFile.txt"
+
+```
+
+# GIT LOG
+
+Permit verify all commit and added file to your repository in order from new commits to old commits.
+
+```bash
+$ git log
+```
+
+Output:
+
+```bash
+commit 4473bea6bb05cec9c50f756a4b5332ceef53c1c1 (HEAD -> main)
+Author: name = ER!CK <38144008+ERICK-ZABALA@users.noreply.github.com>
+Date:   Thu Sep 21 05:11:59 2023 +0000
+
+    updated: file gitignore
+
+commit 74b0c115a600bfffcf9edc20ad26617260641fb3 (origin/main, origin/HEAD)
+Author: name = ER!CK <38144008+ERICK-ZABALA@users.noreply.github.com>
+Date:   Thu Sep 21 04:44:42 2023 +0000
+:...skipping...
+commit 4473bea6bb05cec9c50f756a4b5332ceef53c1c1 (HEAD -> main)
+Author: name = ER!CK <38144008+ERICK-ZABALA@users.noreply.github.com>
+Date:   Thu Sep 21 05:11:59 2023 +0000
+
+    updated: file gitignore
+
+commit 74b0c115a600bfffcf9edc20ad26617260641fb3 (origin/main, origin/HEAD)
+Author: name = ER!CK <38144008+ERICK-ZABALA@users.noreply.github.com>
+Date:   Thu Sep 21 04:44:42 2023 +0000
+
+    updated: github
+
+commit a1e59790ca14a6045c606aeffa08a7ea9c438436
+Author: name = ER!CK <38144008+ERICK-ZABALA@users.noreply.github.com>
+Date:   Wed Sep 20 03:40:43 2023 +0000
+
+    updated docker
+
+```
+
++ More information using Git ID: 
+
+```bash
+$ git show 4473bea6bb05cec9c50f756a4b5332ceef53c1c1
+```
+
+Output:
+
+```bash
+commit 4473bea6bb05cec9c50f756a4b5332ceef53c1c1 (HEAD -> main)
+Author: name = ER!CK <38144008+ERICK-ZABALA@users.noreply.github.com>
+Date:   Thu Sep 21 05:11:59 2023 +0000
+
+    updated: file gitignore
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 00000000..7c1a581f
+```
+
+# GIT REVERT
+
+To revert changes:
+
+
+
