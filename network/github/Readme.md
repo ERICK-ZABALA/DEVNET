@@ -151,9 +151,20 @@ index 00000000..7c1a581f
 
 # GIT REVERT
 
-To revert changes:
+To revert changes, verify that you do not have any commit on queue using git status.
 
-git revert 4473bea6bb05cec9c50f756a4b5332ceef53c1c1
+```bash
+git revert 3bb043fbb1f5d279d6d6f7748e41920dba9e2f93
+```
+
+Output:
+
+```bash
+Auto-merging network/github/Readme.md
+[main 075a97df] Revert "updated: file gitignore"
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+```
 
 
 
