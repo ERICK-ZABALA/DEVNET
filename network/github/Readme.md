@@ -24,21 +24,16 @@ Git is usefull:
 These features make Git a powerful and flexible version control system for developers and teams of all sizes.
 
 # Install GIT
-```bash
+
 $ sudo apt update
 $ sudo apt install -y git
 & git --version
-```
 
 + Verify Config Set:
 
-```bash
 $ git config --list
-```
 
-```bash
-Output:
-
+``` bash
 filter.lfs.clean=git-lfs clean -- %f
 filter.lfs.smudge=git-lfs smudge -- %f
 filter.lfs.process=git-lfs filter-process
