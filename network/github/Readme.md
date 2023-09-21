@@ -199,3 +199,36 @@ git branch
 
 ```
 
+# GIT PULL
+
+```bash
+git remote add gitHubRepo https://github.com/ERICK-ZABALA/DEVNET.git
+git remote -v
+
+origin  https://github.com/ERICK-ZABALA/DEVNET (fetch)
+origin  https://github.com/ERICK-ZABALA/DEVNET (push)
+
+git pull https://github.com/ERICK-ZABALA/DEVNET main
+
+From https://github.com/ERICK-ZABALA/DEVNET
+ * branch              main       -> FETCH_HEAD
+Already up to date.
+
+git push https://github.com/ERICK-ZABALA/DEVNET main
+
+Everything up-to-date
+
+```
+
+# GIT CLONE
+```bash
+git clone https://github.com/ERICK-ZABALA/DEVNET.git
+```
+
+# FORK
+
+When you make a fork from particular project and you make some changes.
+
+Pull Request: we should fill in as much information as possible to
+provide justifications for making the change.
+
