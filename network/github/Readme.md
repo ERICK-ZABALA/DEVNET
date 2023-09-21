@@ -165,6 +165,37 @@ Auto-merging network/github/Readme.md
  1 file changed, 7 insertions(+), 2 deletions(-)
 
 ```
+# GIT RESET
 
+Permit eliminate sequence of changes of one times.
 
+```bash
+git reset --hard 74b0c115a600bfffcf9edc20ad26617260641fb3
+```
+Output: 
+
+```bash
+HEAD is now at 74b0c115 updated: github
+```
+
+# GIT Branch
+
+Permit create different branches in the same repository then you merge your branch with your master branch then.
+
+```bash
+git branch developer
+
+git branch
+  developer
+* main
+
+git checkout developer
+M       network/github/Readme.md
+Switched to branch 'developer'
+
+git branch
+* developer
+  main
+
+```
 
