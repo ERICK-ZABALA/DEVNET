@@ -1,0 +1,8 @@
+CSR1000V#sh run | sec ssh
+ip ssh source-interface GigabitEthernet1
+ip ssh version 2
+ip ssh pubkey-chain
+  username devnet
+   key-hash ssh-rsa 9016CC1872FC6D1771F74872303883F5 
+ip ssh server algorithm hostkey ssh-rsa
+ transport input ssh

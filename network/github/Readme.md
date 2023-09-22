@@ -232,3 +232,93 @@ When you make a fork from particular project and you make some changes.
 Pull Request: we should fill in as much information as possible to
 provide justifications for making the change.
 
+# GIT with Python
+
+```bash
+pip install gitpython
+```
+
+```python
+$ python3
+Python 3.10.8 (main, Sep 13 2023, 16:52:46) [GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from git import Repo
+>>> repo = Repo('/workspaces/DEVNET')
+>>> for commits in list(repo.iter_commits('main')):
+...     print(commits)
+... 
+3880083a277434f1ebe784b0e370b1d57670a3b3
+e27ab7f27d23720324943bbec2377f2472755bba
+1eb469afeddb407a3114b079fe71c6c2ffb0967e
+89dbc9bbbc6e12afae59a5f6f76f357084f57514
+
+>>> for (path, stage), entry in repo.index.entries.items():
+... print(path, stage, entry)
+...
+myFile.txt 0 100644 69e7d4728965c885180315c0d4c206637b3f6bad 0 myFile.txt
+```
+
+# PyGitHub
+
+```bash
+$ pip install PyGithub
+```
+```python
+
+Python 3.10.8 (main, Sep 13 2023, 16:52:46) [GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from github import Github
+>>> g = Github("ghp_Is")
+>>> for repo in g.get_user().get_repos():
+...     print(repo)
+... 
+Repository(full_name="c.../38144008")
+Repository(full_name="E.../01_Webex_Connect_SMS")
+Repository(full_name="E.../02_Webex_Connect_VideoCall")
+>>> exit()
+
+```
+# Automating Configuration Backup
+
+This code permit copy your files to your github using add and commit.
+
+```python
+#!/usr/bin/env python3
+# reference: https://stackoverflow.com/questions/38594717/how-do-ipush-new-files-to-github
+from github import Github, InputGitTreeElement
+import os
+
+github_token = 'ghp_...'
+configs_dir = 'configs'
+github_repo = 'TestBackup'
+
+# Retrieve the list of files in configs directory
+file_list = []
+for dirpath, dirname, filenames in os.walk(configs_dir):
+    for f in filenames:
+        file_list.append(configs_dir + "/" + f)
+
+g = Github(github_token)
+repo = g.get_user().get_repo(github_repo)
+
+commit_message = 'add configs'
+master_ref = repo.get_git_ref('heads/main')
+master_sha = master_ref.object.sha
+base_tree = repo.get_git_tree(master_sha)
+element_list = list()
+
+for entry in file_list:
+    with open(entry, 'r') as input_file:
+        data = input_file.read()
+    element = InputGitTreeElement(entry, '100644', 'blob', data)
+    element_list.append(element)
+
+# Create tree and commit
+tree = repo.create_git_tree(element_list, base_tree)
+parent = repo.get_git_commit(master_sha)
+commit = repo.create_git_commit(commit_message, tree, [parent])
+master_ref.edit(commit.sha)
+
+```
+
+![Alt text](image.png)
